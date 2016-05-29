@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 .maps {
 	overflow:hidden;
 	width:100%;
@@ -44,51 +43,4 @@ html, body {
 
 #place_name{
     text-align:center;
-=======
-.maps {
-	overflow:hidden;
-	width:100%;
-}
-
-.map {
-    position: relative;
-    float:left;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    width:30%;
-    padding-top: 30%;
-    border-radius: 50%;
-    transform: translateZ(0);
-    margin:1.66%;
-}
-
-.details_wrap {
-	width:100%;
-	height:46%;
-	background-color:#a1acc9;
-}
-
-.details {
-	width:33.33%;
-	height:100%;
-}
-
-#timeline {
-	width: 100%;
-	height: 8%;
-	background-color: #000000
-}
-
-html, body {
-	height: 100%;
-    font-family: 'Roboto', sans-serif;
-    font-size: 30px;
-    color: #000000;
-}
-
-#place_name{
-    text-align:center;
->>>>>>> origin/master
 }
