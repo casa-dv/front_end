@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "map-all",
   "version": "1.0.0",
@@ -14,3 +15,21 @@
   "author": "",
   "license": "ISC"
 }
+=======
+{
+  "name": "map-all",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "dependencies": {
+    "leaflet": "^1.0.0-rc.1",
+    "leaflet.markercluster": "^1.0.0-rc.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
+>>>>>>> origin/master

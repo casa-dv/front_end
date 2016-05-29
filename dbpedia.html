@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <head>
     <title>Bus stops of London</title>
@@ -33,3 +34,40 @@
     });
     </script>
 </body>
+=======
+<!doctype html>
+<head>
+    <title>Bus stops of London</title>
+    <meta charset="utf-8">
+    <link href="./leaflet.css" rel="stylesheet">
+    <link href="./MarkerCluster.css" rel="stylesheet">
+    <link href="./MarkerCluster.Default.css" rel="stylesheet">
+    <link href="./main.css" rel="stylesheet">
+</head>
+<body>
+    <div id="map"></div>
+    <div id="label">
+        <h1>DBpedia around Greater London</h1>
+        <p>Dataset: http://downloads.dbpedia.org/2015-10/core-i18n/en/geo_coordinates_en.tql.bz2</p>
+        <p>Downloaded from: <a href="http://wiki.dbpedia.org/Downloads2015-10">http://wiki.dbpedia.org/Downloads2015-10</a></p>
+        <p>This is a bulk extract from DBpedia of english (en) wikipedia articles with geographical coordinates,
+        filtered to include only articles around London from (0.489&nbsp;W, 51.28&nbsp;N) to (0.236&nbsp;E, 51.686&nbsp;N).</p>
+    </div>
+    <script src="./d3.v3.min.js"></script>
+    <script src="./leaflet.js"></script>
+    <script src="./leaflet.markercluster.js"></script>
+    <script src="./main.js"></script>
+    <script>
+    map.zoomControl.setPosition('topright');
+    d3.json('./geo_coordinates_en.json', function(response){
+        var cluster = L.markerClusterGroup();
+        L.geoJson(response,{
+            onEachFeature: function(feature, layer){
+                layer.bindPopup("<a href=\""+feature.properties.wikipedia_url+"\">"+feature.properties.wikipedia_url+"</a>")
+            }
+        }).addTo(cluster);
+        map.addLayer(cluster);
+    });
+    </script>
+</body>
+>>>>>>> origin/master
