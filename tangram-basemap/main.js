@@ -27,20 +27,18 @@ map = (function () {
 	}
 
 	function daycycle() {
-		var d = window.sliderTime; // unix ms
-		if(!d){
+		var t = window.sliderTime; // unix ms
+		var h = window.sliderHour;
+		var hx = window.sliderHourIndex;
+		var dx = window.sliderDayIndex;
+		if(!scene || !scene.lights){
 			return;
 		}
 
-		var t = (3.14159 * (+moment(d).format('k') - 1) / 12) + 3.14159;
+		var w = (3.14159 * (h / 12)) + 3.14159;
 
-		var x = Math.sin(t);
-		var y = Math.sin(t+(3.14159/2)); // 1/4 offset
-		var z = Math.sin(t+(3.14159)); // 1/2 offset
-
-		console.log(x);
-
-		scene.view.camera.axis = {x: x, y: y};
+		var x = Math.sin(w);
+		var y = Math.sin(w+(3.14159/2)); // 1/4 offset
 
 		// offset blue and red for sunset and moonlight effect
 		var B = x + Math.abs(Math.sin(t+(3.14159*0.5)))/4;
@@ -53,7 +51,7 @@ map = (function () {
 		var py = Math.min(y, 0); // positive y
 
 		// light up the roads at night
-		scene.styles["roads"].material.emission.amount = [-py, -py, -py, 1];
+		scene.styles["roads"].material.emission.amount = [-0.5-py, -0.5-py, -0.5-py, 1];
 
 		// turn water black at night
 		scene.styles["water"].material.ambient.amount = [py+1, py+1, py+1, 1];
@@ -85,8 +83,17 @@ map = (function () {
 	var slider = document.getElementById('timeline');
 
 	var now = moment().valueOf();
+	window.sliderSliderStart = now;
 	window.sliderTime = now;
 	var then = moment().add(7,'days').valueOf();
+
+	function update_time_globals(){
+		var t = window.sliderTime;
+		window.sliderHour = (+(moment(t).format('k')) - 1);
+		window.sliderHourIndex = Math.floor((t - window.sliderSliderStart)/(1000*60*60));
+		window.sliderDayIndex = Math.floor(window.sliderHourIndex / 24);
+	}
+	update_time_globals();
 
 	noUiSlider.create(slider, {
 		start: now,
@@ -121,6 +128,8 @@ map = (function () {
 	});
 	slider.noUiSlider.on('update', function( values, handle ) {
 		window.sliderTime = parse_slider_value(values);
+		update_time_globals();
+		daycycle();
 	});
 
 	function parse_slider_value(values){

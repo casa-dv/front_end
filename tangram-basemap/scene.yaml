@@ -20,44 +20,32 @@ lights:
     moon:
         type: directional
         direction: [0, 1, -.5]
-        diffuse: [0, 0, .5]
-        ambient: .2
+        diffuse: [0, 0, .1]
+        ambient: .1
 
 styles:
     roads:
         base: lines
+        mix: colorhalftone
         material:
             diffuse: 1
             emission: 1
-    water_simple:
+    water:
         base: polygons
+        mix: colorhalftone
         material:
             diffuse: 1
             ambient: 1
     buildings:
         base: polygons
-        shaders:
-            blocks:
-                color: |
-                    color.gb *= vec3(min((v_world_position.z*.001 + .5),1.));
+        mix: colorhalftone
         material:
             diffuse: 1
             ambient: 1
 
-    water:
-        base: polygons
-        animated: true
-        shaders:
-            defines:
-                EFFECT_NOISE_ANIMATED: true
-            blocks:
-                global:
-                    url: shaders/glsl-noise-periodic-3d.glsl
-                color:
-                    url: shaders/noise.glsl
-
     cloud:
         base: polygons
+        mix: colorhalftone
         animated: true
         shaders:
             defines:
@@ -93,14 +81,14 @@ layers:
             polygons:
                 style: colorhalftone
                 order: function() { return feature.sort_key; }
-                color: [0.5, 0.55, 0.5]
+                color: [0.5, 0.525, 0.5]
         pitch:
             filter:
                 kind: ['pitch', 'garden', 'playground']
             draw:
                 polygons:
                     style: colorhalftone
-                    color: [0.3, 0.675, 0.3]
+                    color: [0.3, 0.375, 0.3]
 
     water:
         data:
@@ -109,15 +97,15 @@ layers:
         draw:
             polygons:
                 order: function() { return feature.sort_key; }
-                style: colorhalftone
-                color: [0.5, 0.5, 0.875]
+                style: water
+                color: [0.5, 0.5, 0.825]
         outline:
             # don't draw outlines on ocean or riverbank features
             filter: {not: {kind: [ocean, river, riverbank]}}
             draw:
                 lines:
                     style: colorhalftone
-                    color: [0.6, 0.6, 0.975]
+                    color: [0.6, 0.6, 0.75]
                     order: function() { return feature.sort_key; }
                     width: function () {
                             return (
@@ -131,11 +119,11 @@ layers:
             layer: roads
         draw:
             lines:
-                style: colorhalftone
+                style: roads
                 order: function () { return feature.sort_key; }
                 outline:
-                    color: [0.7, 0.7, 0.7]
-                    width: 1
+                    color: [0.2, 0.2, 0.2]
+                    width: 3
         highway:
             filter: { kind: highway }
             draw:
@@ -183,14 +171,15 @@ layers:
                         order: 352 # magic number
                         width: .5
 
+
     buildings:
         data:
             source: osm
             layer: buildings
         draw:
             polygons:
-                style: colorhalftone
+                style: buildings
                 order: function() { return feature.sort_key; }
-                color: [.6, .6, .6]
+                color: [.4, .4, .4]
                 # at z15, only extrude buildings over 20 m; at z16 and higher, extrude all buildings
                 extrude: function () { return (($zoom >= 15 && feature.height > 20) || $zoom >= 16) }

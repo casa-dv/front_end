@@ -31,14 +31,6 @@ vec3 dots (vec3 pos) {
         vec4(0., 0., 0., 1.)
     );
 
-    // dot_rotate *= mat4(
-    //     // rotate y
-    //     vec4(cos(dot_angle), 0., sin(dot_angle), 0.),
-    //     vec4(0., 1., 0., 0.),
-    //     vec4(-sin(dot_angle), 0., cos(dot_angle), 0.),
-    //     vec4(0., 0., 0., 1.)
-    // );
-
     pos = (dot_rotate * vec4(pos, 1.)).xyz;
 
     // offset experiments
