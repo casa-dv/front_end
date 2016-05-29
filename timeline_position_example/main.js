@@ -1,8 +1,11 @@
 /**
  * Map setup
  */
+console.log("Step 0: load main.js");
 
 function load_map(id,options){
+  console.log("Step 2: load map "+id);
+
   var map = L.map(id).setView([options.lat, options.lng], options.zoom);
 
   var access_token = 'pk.eyJ1IjoidG9tYWxydXNzZWxsIiwiYSI6Im9TM1lfSWsifQ.0dE4yPsqc7HJbBT22ceU5g';
@@ -17,20 +20,10 @@ function load_map(id,options){
   return map;
 }
 
-function update_options_from_hash(options){
-  var hash = window.location.hash;
-  if (hash.length){
-    var elements = hash.substring(1).split('&');
-    for (var i = 0; i < elements.length; i++) {
-      var pair = elements[i].split('=');
-      options[pair[0]] = pair[1];
-    }
-  }
-  return options;
-}
-
 function load_data_for_map_places(){
   d3.json('http://casa-dv.made-by-tom.co.uk/places?lat='+options.lat+"&lon="+options.lng+"&type=cafe", function(response){
+      console.log("Step 3: done loading place data, now add it to the map");
+
       L.geoJson(response, {
           onEachFeature: function (feature, layer) {
               layer.on("click",function(){
@@ -38,12 +31,13 @@ function load_data_for_map_places(){
               });
           }
       }).addTo(window.maps.map_places);
-    console.log(response);
   });
 }
 
 function load_data_for_map_events(){
   d3.json('http://casa-dv.made-by-tom.co.uk/eventbrite?lat='+options.lat+"&lon="+options.lng, function(response){
+      console.log("Step 3: done loading event data, now add it to the map");
+
       var timeline = L.timeline(response, {
           onEachFeature: function (feature, layer) {
               layer.on("click",function(){
@@ -52,27 +46,34 @@ function load_data_for_map_events(){
               });
           }
       }).addTo(window.maps.map_events);
+
+      // create timeline control
       var timelineControl = L.timelineSliderControl({
           formatOutput: function(date){
               return moment(date).format("YYYY-MM-DD");
           },
           enableKeyboardControls: true,
       });
+
+      // add timeline control to page
       var timelineControlElement = timelineControl.onAdd(maps.map_events);
       timelineControl.addTimelines(timeline);
       document.getElementById('timeline').appendChild(timelineControlElement);
-    console.log(response);
+
   });
 }
 
-function init(){
-  var defaults = {
+
+function setup(){
+  console.log("Step 1: set up options");
+
+  var options = {
     lat: 51.5218991,
     lng: -0.1381519,
     zoom: 15
   };
 
-  window.options = update_options_from_hash(defaults);
+  window.options = options;
   window.maps = {};
 
   var map_ids = [
@@ -93,4 +94,4 @@ function init(){
 }
 
 
-init();
+setup();
