@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Stop_Code_LBSL": "1000", "Bus_Stop_Code": "91532", "Naptan_Atco": "490000266G", "Stop_Name": "WESTMINSTER STATION <> \/ PARLIAMENT SQUARE", "Location_Easting": 530171, "Location_Northing": 179738, "Heading": 177, "Stop_Area": "0K08", "Virtual_Bus_Stop": 0 }, "geometry": { "type": "Point", "coordinates": [ -0.125988186232907, 51.501597010570258 ] } },
+{ "type": "Feature", "properties": { "Stop_Code_LBSL": "10001", "Bus_Stop_Code": "72689", "Naptan_Atco": "490013793E", "Stop_Name": "TREVOR CLOSE", "Location_Easting": 515781, "Location_Northing": 174783, "Heading": 78, "Stop_Area": "NB16", "Virtual_Bus_Stop": 0 }, "geometry": { "type": "Point", "coordinates": [ -0.334830919749085, 51.46019102155244 ] } },
+{ "type": "Feature", "properties": { "Stop_Code_LBSL": "10002", "Bus_Stop_Code": "48461", "Naptan_Atco": "490000108F", "Stop_Name": "HIGHBURY CORNER", "Location_Easting": 531614, "Location_Northing": 184603, "Heading": 5, "Stop_Area": "C902", "Virtual_Bus_Stop": 0 }, "geometry": { "type": "Point", "coordinates": [ -0.103395032651287, 51.544982493545739 ] } },
+{ "type": "Feature", "properties": { "Stop_Code_LBSL": "10003", "Bus_Stop_Code": "77150", "Naptan_Atco": "490000108B", "Stop_Name": "HIGHBURY & ISLINGTON STATION <> #", "Location_Easting": 531551, "Location_Northing": 184803, "Heading": 127, "Stop_Area": "C903", "Virtual_Bus_Stop": 0 }, "geometry": { "type": "Point", "coordinates": [ -0.104228312685852, 51.546794462527124 ] } },
+    { "type": "Feature", "properties": { "Stop_Code_LBSL": "10004", "Bus_Stop_Code": "48037", "Naptan_Atco": "490012451S", "Stop_Name": "ST MARY MAGDALENE CHURCH", "Location_Easting": 531365, "Location_Northing": 184986, "Heading": 141, "Stop_Area": "C904", "Virtual_Bus_Stop": 0 }, "geometry": { "type": "Point", "coordinates": [ -0.106840874249912, 51.548482277324084 ] } }
+]}

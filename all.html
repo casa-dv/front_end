@@ -1,0 +1,18 @@
+<!doctype html>
+<head>
+    <title>Bus stops of London</title>
+    <meta charset="utf-8">
+    <link href="./leaflet.css" rel="stylesheet">
+    <link href="./main.css" rel="stylesheet">
+</head>
+<body>
+    <div id="map"></div>
+    <script src="./d3.v3.min.js"></script>
+    <script src="./leaflet.js"></script>
+    <script src="./main.js"></script>
+    <script>
+    d3.json('./tfl-bus-stops.json', function(response){
+      L.geoJson(response).addTo(map);
+    });
+    </script>
+</body>
